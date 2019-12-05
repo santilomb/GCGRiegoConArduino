@@ -4,4 +4,5 @@ Proyecto con el grupdel trabajo para generar un regador que posee 3 circuitos in
 Simulacion e tinkercad.com
 https://www.tinkercad.com/things/kisXjxzuSdu-gcgriegoconarduino/
 
-![Diagrama del circuito](https://github.com/santilomb/GCGRiegoConArduino/diagrama.png)
+
+![Diagrama del circuito](https://github.com/santilomb/GCGRiegoConArduino/blob/master/diagrama.png)
