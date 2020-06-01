@@ -8,6 +8,7 @@
 #define PIN_TANQUE_BAJO 11
 #define PIN_TANQUE_ALTO 12
 #define PIN_BOTON_1 7
+#prueba GIT
 
 enum Estados_enum {INICIANDO, LIBRE, SENSANDO, REGANDO};
 
