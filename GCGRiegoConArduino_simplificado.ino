@@ -187,6 +187,11 @@ void iniciando(){
 
 void sensando(){
   valorSensorLuz = digitalRead(PIN_SENSOR_LUZ);
+  if (valorSensorLuz == 1){
+    Serial.println("      @@@@@@@@@@@@@@@@@@@@@@@@@");
+    Serial.println("      @  Sensor LUZ activado  @");
+    Serial.println("      @@@@@@@@@@@@@@@@@@@@@@@@@");
+  }
 }
 
 void regando(){
