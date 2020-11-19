@@ -6,7 +6,7 @@
 #define PIN_BOMBA 5
 #define PIN_BOTON_1 7
 
-#define UMBRAL_LUZ 750
+#define UMBRAL_LUZ 600
 
 enum Estados_enum {INICIANDO, LIBRE, REGANDO, REGADO};
 
@@ -24,9 +24,9 @@ int faseRiego = 0;
 //temporizadores en segundos
 int timerIniciando = 5; 
 int timerRiego = 0; 
-int tiempoRiego1 = 10;
-int tiempoRiego2 = 20;
-int tiempoRiego3 = 5;
+int tiempoRiego1 = 5;  //tiempo de riego circuito 1
+int tiempoRiego2 = 7;  //tiempo de riego circuito 2
+int tiempoRiego3 = 4;  //tiempo de riego circuito 3
 int timerEstadoRegado = 72000;  //Intevalo de tiempo luego del estado REGANDO en donde no se mide el sensor de LUZ  72000=20hs
 
 // Variables para trabajar con el debounce del boton
@@ -190,7 +190,7 @@ void sensando(){
   valorSensorLuz = analogRead(PIN_SENSOR_LUZ);
   Serial.print("      ***********  Cantidad de LUZ: ");
   Serial.print(valorSensorLuz);
-  Serial.print("  ***********");
+  Serial.println("  ***********");
   if (valorSensorLuz > UMBRAL_LUZ){
     Serial.println("      @@@@@@@@@@@@@@@@@@@@@@@@@");
     Serial.println("      @  Sensor LUZ activado  @");
@@ -213,6 +213,8 @@ void regando(){
     break;
   case 1:
     digitalWrite(PIN_VALVULA_1, LOW);
+    digitalWrite(PIN_VALVULA_2, HIGH);
+    digitalWrite(PIN_VALVULA_3, HIGH);
     digitalWrite(PIN_BOMBA, LOW);
     timerRiego--;
     if (timerRiego == 0) {
@@ -221,7 +223,9 @@ void regando(){
     }
     break;
   case 2:
+    digitalWrite(PIN_VALVULA_1, HIGH);
     digitalWrite(PIN_VALVULA_2, LOW);
+    digitalWrite(PIN_VALVULA_3, HIGH);
     digitalWrite(PIN_BOMBA, LOW);
     timerRiego--;
     if (timerRiego == 0) {
@@ -230,6 +234,8 @@ void regando(){
     }
     break;
   case 3:
+    digitalWrite(PIN_VALVULA_1, HIGH);
+    digitalWrite(PIN_VALVULA_2, HIGH);
     digitalWrite(PIN_VALVULA_3, LOW);
     digitalWrite(PIN_BOMBA, LOW);
     timerRiego--;
@@ -244,6 +250,7 @@ void regando(){
     digitalWrite(PIN_VALVULA_3, HIGH);
     digitalWrite(PIN_BOMBA, HIGH);
     faseRiego = 0;
+    boton1 = 0;
     break;
   default:
     break;
