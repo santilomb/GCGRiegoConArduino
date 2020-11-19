@@ -140,6 +140,9 @@ void maquina_estados_run()
       //Luego de REGANDO voy a REGADO por un tiempo aproximado a 24hs donde intentaremos 
       //lograr que el sensor de luz active solo una vez al dia el riego
       //el boton podra hacer regar cuantas veces quiera tanto en LIBRE como en REGADO
+  Serial.print("      ***********  Segs antes de habilitar sensor de LUZ: ");
+  Serial.print(timerEstadoRegado);
+  Serial.println("  ***********");
       if (timerEstadoRegado > 0 ){
         if (boton1 == 1 ){
           estado = REGANDO;
