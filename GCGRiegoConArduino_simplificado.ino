@@ -68,11 +68,13 @@ void loop(){
   if ((millisActuales - millisAnteriores) >= intervalo){
     millisAnteriores = millisActuales;
 
+    Serial.println("-------------------------------------------------------------------");
     Serial.print("Time: ");
     Serial.print(millisActuales/1000);
     Serial.print("s - ");
     Serial.print("Estado: ");
     Serial.println(estado);
+    Serial.println("-------------------------------------------------------------------");
 
     maquina_estados_run();
 
@@ -94,7 +96,9 @@ void verifico_botones()
       // only toggle the LED if the new button state is HIGH
       if (valorBoton1 == HIGH) {
         boton1 = 1;
-        Serial.println("   boton1 -> nuevo valor: 1");
+        Serial.println("      @@@@@@@@@@@@@@@@@@@@@");
+        Serial.println("      @  boton1 APRETADO  @");
+        Serial.println("      @@@@@@@@@@@@@@@@@@@@@");
       }
     }
   }
@@ -106,6 +110,10 @@ void verifico_botones()
  
 void maquina_estados_run() 
 {
+  Serial.println("      #######################################");
+  Serial.print("        MAQUINA DE ESTADO =   ");
+  Serial.println(estado);
+  Serial.println("      #######################################");
   switch(estado)
   {
     case INICIANDO:
@@ -182,6 +190,12 @@ void sensando(){
 }
 
 void regando(){
+  Serial.println("            ................................");
+  Serial.print("                 REGANDO FASE  =   ");
+  Serial.println(faseRiego);
+  Serial.print("                 TIEMPO RESTANTE FASE  =   ");
+  Serial.println(timerRiego);
+  Serial.println("            ................................");
   switch (faseRiego)
   {
   case 0:
