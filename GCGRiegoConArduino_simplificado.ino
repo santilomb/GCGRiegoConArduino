@@ -1,10 +1,12 @@
-#define PIN_SENSOR_LUZ 8
+#define PIN_SENSOR_LUZ 0
 #define PIN_VALVULA_1 2
 #define PIN_VALVULA_1 2
 #define PIN_VALVULA_2 3
 #define PIN_VALVULA_3 4
 #define PIN_BOMBA 5
 #define PIN_BOTON_1 7
+
+#define UMBRAL_LUZ 750
 
 enum Estados_enum {INICIANDO, LIBRE, REGANDO, REGADO};
 
@@ -40,7 +42,6 @@ int valorSensorLuz = 0;
 void setup(){
   Serial.begin(115200);
   // Definicion inputs
-  pinMode(PIN_SENSOR_LUZ, INPUT);
   pinMode(PIN_BOTON_1, INPUT);
 
   //definicion Outputs
@@ -126,7 +127,7 @@ void maquina_estados_run()
       // en este estado se sensara el sensor de luz, si se enciende pasaremos a REGANDO. Tambien iremos a REGANDO si se preciona el boton.
       sensando();
 
-      if (boton1 == 1 || valorSensorLuz == 1 ){
+      if (boton1 == 1 || valorSensorLuz > UMBRAL_LUZ ){
         estado = REGANDO;
         boton1 = 0;
       }
@@ -186,8 +187,11 @@ void iniciando(){
 }
 
 void sensando(){
-  valorSensorLuz = digitalRead(PIN_SENSOR_LUZ);
-  if (valorSensorLuz == 1){
+  valorSensorLuz = analogRead(PIN_SENSOR_LUZ);
+  Serial.print("      ***********  Cantidad de LUZ: ");
+  Serial.print(valorSensorLuz);
+  Serial.print("  ***********");
+  if (valorSensorLuz > UMBRAL_LUZ){
     Serial.println("      @@@@@@@@@@@@@@@@@@@@@@@@@");
     Serial.println("      @  Sensor LUZ activado  @");
     Serial.println("      @@@@@@@@@@@@@@@@@@@@@@@@@");
