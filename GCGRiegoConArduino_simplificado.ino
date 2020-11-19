@@ -9,6 +9,7 @@
 #define UMBRAL_LUZ 600
 
 enum Estados_enum {INICIANDO, LIBRE, REGANDO, REGADO};
+String estados[] = { "INICIANDO", "LIBRE", "REGANDO", "REGADO"};
 
 unsigned long millisActuales;
 unsigned long millisAnteriores = 0;
@@ -74,7 +75,7 @@ void loop(){
     Serial.print(millisActuales/1000);
     Serial.print("s - ");
     Serial.print("Estado: ");
-    Serial.println(estado);
+    Serial.println(estados[estado]);
     Serial.println("-------------------------------------------------------------------");
 
     maquina_estados_run();
@@ -111,10 +112,6 @@ void verifico_botones()
  
 void maquina_estados_run() 
 {
-  Serial.println("      #######################################");
-  Serial.print("        MAQUINA DE ESTADO =   ");
-  Serial.println(estado);
-  Serial.println("      #######################################");
   switch(estado)
   {
     case INICIANDO:
