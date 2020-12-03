@@ -23,8 +23,8 @@ int valorBoton1 = 0;
 int faseRiego = 0;
 
 //temporizadores en segundos
-int timerIniciando = 5; 
-int timerRiego = 0; 
+int timerIniciando = 5;
+int timerRiego = 0;
 int tiempoRiego1 = 5;  //tiempo de riego circuito 1
 int tiempoRiego2 = 7;  //tiempo de riego circuito 2
 int tiempoRiego3 = 4;  //tiempo de riego circuito 3
@@ -33,8 +33,8 @@ int timerEstadoRegado = 72000;  //Intevalo de tiempo luego del estado REGANDO en
 // Variables para trabajar con el debounce del boton
 int valorAnteriorBoton1 = 0;   //El valor anterior del boton_1
 
-unsigned long ultimoTiempoDebounce = 0;  
-unsigned long debounceDelay = 50;  
+unsigned long ultimoTiempoDebounce = 0;
+unsigned long debounceDelay = 50;
 
 // Esta variable guarda que se oprimio el boton hasta que la app haga algo con el. Luego se vuelve a 0.
 int boton1 = 0;
@@ -55,7 +55,7 @@ void setup(){
 
 
 
- 
+
 void loop(){
   // En el loop lo unico que hacemos controlar para que se ejecute una vez por intervalo la maquina de estados finitos
 
@@ -65,7 +65,7 @@ void loop(){
   //Verifico botones fuera de la maquina de estados
   verifico_botones();
 
-  // Si llegamos al intervalo de tiempo desde la ultima ejecucion 
+  // Si llegamos al intervalo de tiempo desde la ultima ejecucion
   // ejecutamos la maquina de estados finitos y ponemos el valor de la ultima ejecucion (millisAnteriores) con el valor actual
   if ((millisActuales - millisAnteriores) >= intervalo){
     millisAnteriores = millisActuales;
@@ -109,8 +109,8 @@ void verifico_botones()
 }
 
 
- 
-void maquina_estados_run() 
+
+void maquina_estados_run()
 {
   switch(estado)
   {
@@ -120,7 +120,7 @@ void maquina_estados_run()
       break;
 
     case LIBRE:
-      //Estado por defecto de la maquina. 
+      //Estado por defecto de la maquina.
       // en este estado se sensara el sensor de luz, si se enciende pasaremos a REGANDO. Tambien iremos a REGANDO si se preciona el boton.
       sensando();
 
@@ -128,16 +128,16 @@ void maquina_estados_run()
         estado = REGANDO;
         boton1 = 0;
       }
-    
+
       break;
- 
+
     case REGANDO:
       //Cuando desde SENSANDO haga falta regar vendremos aca e iremos regando segun digamos.
       regando();
       break;
 
     case REGADO:
-      //Luego de REGANDO voy a REGADO por un tiempo aproximado a 24hs donde intentaremos 
+      //Luego de REGANDO voy a REGADO por un tiempo aproximado a 24hs donde intentaremos
       //lograr que el sensor de luz active solo una vez al dia el riego
       //el boton podra hacer regar cuantas veces quiera tanto en LIBRE como en REGADO
   Serial.print("      ***********  Segs antes de habilitar sensor de LUZ: ");
@@ -156,14 +156,14 @@ void maquina_estados_run()
       break;
   }
 }
- 
+
 
 void iniciando(){
   Serial.print("   timerIniciando:");
   Serial.println(timerIniciando);
 
   if (timerIniciando > 0){
-    if( timerIniciando % 2 ) { 
+    if( timerIniciando % 2 ) {
       digitalWrite(PIN_VALVULA_1, LOW);
       digitalWrite(PIN_VALVULA_2, LOW);
       digitalWrite(PIN_VALVULA_3, LOW);
@@ -183,7 +183,7 @@ void iniciando(){
     digitalWrite(PIN_VALVULA_2, HIGH);
     digitalWrite(PIN_VALVULA_3, HIGH);
     digitalWrite(PIN_BOMBA, HIGH);
-  }      
+  }
 }
 
 void sensando(){
@@ -256,3 +256,6 @@ void regando(){
     break;
   }
 }
+
+// fin del programa
+// agrego esto para probar versionado en Atom
